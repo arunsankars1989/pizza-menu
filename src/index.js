@@ -1,6 +1,8 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+// eslint-disable-next-line no-unused-vars
 const pizzaData = [
   {
     name: 'Focaccia',
@@ -46,18 +48,41 @@ const pizzaData = [
   },
 ];
 
+// eslint-disable-next-line no-unused-vars
 function App() {
   const x = 'Arun';
   return (
     <div>
       <h1>Hello React!!!!!</h1>
-      <Pizza/>
-      <Pizza/>
-      <Pizza/>
+      <Header/>
+      <Menu/>
+      <Footer/>
     </div>
   );
 }
 
+// eslint-disable-next-line no-unused-vars
+function Header() {
+  return <h1>Fast React Pizza</h1>;
+}
+
+// eslint-disable-next-line no-unused-vars
+function Menu() {
+  return <div>
+    <h2>Our Menu</h2>
+    <Pizza/>
+    <Pizza/>
+    <Pizza/>
+  </div>;
+}
+
+// eslint-disable-next-line no-unused-vars
+function Footer() {
+  return <footer>{new Date().toLocaleTimeString()} . We're currently open!!</footer>;
+  // return React.createElement('footer', null, 'We\'re currently open!');
+}
+
+// eslint-disable-next-line no-unused-vars
 function Pizza() {
   return (
     <div>
