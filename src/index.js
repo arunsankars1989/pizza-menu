@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './index.css';
 
 // eslint-disable-next-line no-unused-vars
 const pizzaData = [
@@ -50,9 +51,8 @@ const pizzaData = [
 
 // eslint-disable-next-line no-unused-vars
 function App() {
-  const x = 'Arun';
   return (
-    <div>
+    <div className="container">
       <h1>Hello React!!!!!</h1>
       <Header/>
       <Menu/>
@@ -63,18 +63,23 @@ function App() {
 
 // eslint-disable-next-line no-unused-vars
 function Header() {
-  const style = { color: 'red', fontSize: '32px', textTransform: 'uppercase' };
-  return <h1 style={style}>Fast React Pizza</h1>;
+  // const style = { color: 'red', fontSize: '32px', textTransform: 'uppercase' };
+  const style = {};
+  return (
+    <header className="header footer">
+      <h1 style={style}>Fast React Pizza</h1>
+    </header>
+  );
 }
 
 // eslint-disable-next-line no-unused-vars
 function Menu() {
-  return <div>
+  return <main className="menu">
     <h2>Our Menu</h2>
     <Pizza/>
     <Pizza/>
     <Pizza/>
-  </div>;
+  </main>;
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -92,7 +97,7 @@ function Footer() {
   // }
   // console.log(hour);
   return (
-    <footer>{new Date().toLocaleTimeString()} . We're currently open!!</footer>
+    <footer className="footer">{new Date().toLocaleTimeString()} . We're currently open!!</footer>
   );
   // return React.createElement('footer', null, 'We\'re currently open!');
 }
@@ -102,7 +107,7 @@ function Pizza() {
   return (
     <div>
       <img src="pizzas/spinaci.jpg" alt="spinaci"/>
-      <h2>Pizza Spinaci</h2>
+      <h3>Pizza Spinaci</h3>
       <p>Tomato, mozarella, spinach, and ricotta cheese</p>
     </div>
   );
