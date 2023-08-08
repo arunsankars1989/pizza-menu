@@ -63,7 +63,8 @@ function App() {
 
 // eslint-disable-next-line no-unused-vars
 function Header() {
-  return <h1>Fast React Pizza</h1>;
+  const style = { color: 'red', fontSize: '32px', textTransform: 'uppercase' };
+  return <h1 style={style}>Fast React Pizza</h1>;
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -78,7 +79,21 @@ function Menu() {
 
 // eslint-disable-next-line no-unused-vars
 function Footer() {
-  return <footer>{new Date().toLocaleTimeString()} . We're currently open!!</footer>;
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
+
+  // if (isOpen) {
+  //   alert('We\'re currently open!');
+  // } else {
+  //   alert('Sorry we\'re closed');
+  // }
+  // console.log(hour);
+  return (
+    <footer>{new Date().toLocaleTimeString()} . We're currently open!!</footer>
+  );
   // return React.createElement('footer', null, 'We\'re currently open!');
 }
 
