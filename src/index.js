@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import PropTypes from 'prop-types';
 
 // eslint-disable-next-line no-unused-vars
 const pizzaData = [
@@ -74,18 +75,57 @@ function Header() {
 
 // eslint-disable-next-line no-unused-vars
 function Menu() {
+
+  const pizzas = pizzaData;
+  // const pizzas = [];
+  const numPizzas = pizzas.length;
+
   return <main className="menu">
     <h2>Our Menu</h2>
-    <Pizza/>
-    <Pizza/>
-    <Pizza/>
+
+    {(numPizzas > 0) ? (
+      <ul className="pizzas">
+        {pizzas.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name}
+          />
+        ))}
+      </ul>
+    ) : <p>We're still working on our menu. Please come back later :) </p>}
+
+    {/*<Pizza
+      name="Pizza Spinaci"
+      ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+      photoName="pizzas/spinaci.jpg"
+      price={10}
+    />*/}
   </main>;
+}
+
+// eslint-disable-next-line no-unused-vars
+
+function Pizza(props) {
+
+  if (props.pizzaObj.soldOut) {
+    return null;
+  }
+
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}/>
+      <div>
+
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
+      </div>
+    </li>
+  );
 }
 
 // eslint-disable-next-line no-unused-vars
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 12;
+  const openHour = 9;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
@@ -96,22 +136,47 @@ function Footer() {
   //   alert('Sorry we\'re closed');
   // }
   // console.log(hour);
+
+  if (!isOpen) {
+    return (
+      <p>We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>
+    );
+  }
+
   return (
-    <footer className="footer">{new Date().toLocaleTimeString()} . We're currently open!!</footer>
+    <footer className="footer">
+      {isOpen ? <Order closeHour={closeHour}/> :
+        <p>We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>}
+    </footer>
   );
   // return React.createElement('footer', null, 'We\'re currently open!');
 }
 
-// eslint-disable-next-line no-unused-vars
-function Pizza() {
+function Order(props) {
   return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="spinaci"/>
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
+    <div className="order">
+      <p>
+        We're open until {props.closeHour}:00. Come visit us or order online
+      </p>
+      <button className="btn">Order</button>
     </div>
   );
 }
+
+Pizza.propTypes = {
+  pizzaObj: PropTypes.object
+};
+
+Order.propTypes = {
+  closeHour: PropTypes.number
+};
+
+// Pizza.propTypes = {
+//   photoName: PropTypes.string,
+//   name: PropTypes.string,
+//   ingredients: PropTypes.string,
+//   price: PropTypes.number
+// };
 
 // React V18
 const root = ReactDOM.createRoot(document.getElementById('root'));
